@@ -1,0 +1,47 @@
+﻿
+@using LicentaPrototip.Models;
+
+@{
+    ViewBag.Title = "Control temperatura";
+}
+@model MyHouseModel
+
+<br>
+<h2>Control temperatura</h2>
+<br>
+
+<div class="form-group row">
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Temperature, "Temperatura curenta")
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Temperature, new { htmlAttributes = new { @id = "tempBox" } })
+        </div>
+    </div>
+</div>
+
+
+@*<script src="http://code.jquery.com/jquery-1.7.1.min.js">
+
+    $(document).ready(function () {
+        $('#tempBox').val("Muie");
+        setTimeout(Temp, 5000);
+    });
+
+    function Temp() {
+            $.ajax({
+                type: 'GET',
+                url: @Url.Action("GetTemp"),
+                success: function (data) {
+                    showTemp(data);
+                },
+                complete: function (data) {
+                    setTimeout(Temp, 5000);
+                }
+            });
+    }
+
+    function showTemp(data) {
+         $('#tempBox').val(data);
+    }
+</script>*@
+

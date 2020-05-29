@@ -1,0 +1,60 @@
+﻿@using LicentaPrototip.Models;
+
+@{
+    ViewBag.Title = "MyHouse";
+
+}
+@model MyHouseModel
+
+<br>
+<h2>MyHouse</h2>
+<br>
+
+<button class="btn btn-secondary" id="intLed" onclick="Led()">Aprinde lumina</button>
+<li class="btn btn-secondary">@Html.ActionLink("LED Verde", "ToggleGreenLed", "Lights")</li>
+<br><br>
+<li class="btn btn-secondary">@Html.ActionLink("Deschide Usa", "OpenDoor", "Lights")</li>
+<li class="btn btn-secondary">@Html.ActionLink("Inchide Usa", "CloseDoor", "Lights")</li>
+<br><br>
+
+@Html.EditorFor(model => model.Temperature, new { htmlAttributes = new { @id = "tempBox"} })
+<button class="btn btn-secondary" id="showTemp" onclick="Temp()">Afisare temperatura</button>
+
+<script type="text/javascript" > 
+    @*$("#showTemp").click(
+        function (e) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ShowTemp")',
+                success: function (results) {
+                    var temp = $("#tempBox");
+                    temp.empty();
+
+                    $.each(results, function () {
+                        login.val(this.ID).text(this.Value);
+                    });
+                }
+            });
+        });*@
+    /*src = "http://code.jquery.com/jquery-1.11.0.min.js"*/
+    function Temp() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("ShowTemp")',
+                success: function (data) {
+                    showTemp(data);
+                }
+            });
+    }
+
+    function showTemp(data) {
+         $('#tempBox').val(data);
+    }
+
+    function Led() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("ToggleLed")'
+            });
+    }
+</script>

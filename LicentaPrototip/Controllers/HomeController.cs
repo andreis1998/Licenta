@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LicentaPrototip.Models;
 
 namespace LicentaPrototip.Controllers
 {
@@ -24,6 +25,11 @@ namespace LicentaPrototip.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult MyHouse()
+        {
             return View();
         }
     }
