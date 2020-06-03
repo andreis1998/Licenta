@@ -6,20 +6,19 @@ using System.Web;
 using System.Web.Mvc;
 using LicentaPrototip.Utilities;
 using LicentaPrototip.Models;
+using LicentaPrototip.Context;
 
 namespace LicentaPrototip.Controllers
 {
     public class LightsController : Controller
     {
         public HttpUtilities HttpHelper = new HttpUtilities();
+        public AppDbContext db = new AppDbContext();
 
         public ActionResult Index(MyHouseModel model)
         {
-            if (model == null)
-            {
-                model.Temperature = string.Empty;
-                return View(model);
-            }
+
+            model.IsLedIntensityAutomatic = bool.Parse(db.HouseParameters.SingleOrDefault(x => x.Description == "IntensitateAutomata").Value);
 
             return View(model);
         }
@@ -61,6 +60,32 @@ namespace LicentaPrototip.Controllers
             t.Wait();
 
             return t.Result;
+        }
+
+        [HttpPost]
+        public void SetIntensity(string intensity)
+        {
+            var t = Task.Run(() => HttpHelper.PostAsync("led?intensity=" + intensity));
+            t.Wait();
+        }
+
+        [HttpPost]
+        public void SetAutomaticIntensity()
+        {
+            var t = Task.Run(() => HttpHelper.PostAsync("automaticLedIntensity"));
+            t.Wait();
+
+            var automaticIntensityValue = db.HouseParameters.SingleOrDefault(x => x.Description == "IntensitateAutomata");
+            if (automaticIntensityValue.Value == bool.TrueString)
+            {
+                automaticIntensityValue.Value = bool.FalseString;
+            }
+            else
+            {
+                automaticIntensityValue.Value = bool.TrueString;
+            }
+
+            db.SaveChanges();
         }
     }
 }

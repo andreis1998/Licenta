@@ -1,4 +1,5 @@
-﻿using LicentaPrototip.Jobs;
+﻿using LicentaPrototip.App_Start;
+using LicentaPrototip.Jobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace LicentaPrototip
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             JobScheduler.Start();
+            InitialConfiguration.Load();
         }
     }
 }

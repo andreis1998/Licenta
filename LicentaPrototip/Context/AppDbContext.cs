@@ -10,12 +10,13 @@ namespace LicentaPrototip.Context
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext() : base("SmartHouse")
+        public AppDbContext() : base("SmartHouseConnection")
         {
             Database.SetInitializer<AppDbContext>(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
             //Database.SetInitializer<AppDbContext>(null);
         }
 
         public DbSet<HouseParameters> HouseParameters { get; set; }
+        public DbSet<TemperatureLogs> TemperatureLogs { get; set; }
     }
 }
