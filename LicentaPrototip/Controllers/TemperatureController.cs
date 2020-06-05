@@ -23,7 +23,10 @@ namespace LicentaPrototip.Controllers
         {
             var lowTempLimit = db.HouseParameters.SingleOrDefault(x => x.Description == "LimitaInferioaraTemperatura").Value;
             var highTempLimit = db.HouseParameters.SingleOrDefault(x => x.Description == "LimitaSuperioaraTemperatura").Value;
+            var currentTemp = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "1FFC07FE-4A3B-43BA-AFA6-597B0F2763C3").Value;
+            var currentTempSet = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "02E1271D-D30C-4C16-8010-E729099CC7E3").Value;
             var model = new MyHouseModel();
+
             if (!string.IsNullOrEmpty(lowTempLimit))
             {
                 model.LowLimitTemperature = int.Parse(lowTempLimit);
@@ -31,6 +34,14 @@ namespace LicentaPrototip.Controllers
             if (!string.IsNullOrEmpty(highTempLimit))
             {
                 model.HighLimitTemperature = int.Parse(highTempLimit);
+            }
+            if (!string.IsNullOrEmpty(currentTemp))
+            {
+                model.Temperature = float.Parse(currentTemp);
+            }
+            if (!string.IsNullOrEmpty(currentTempSet))
+            {
+                model.CurrentSetTemperature = float.Parse(currentTempSet);
             }
 
             return View(model);
@@ -66,6 +77,18 @@ namespace LicentaPrototip.Controllers
 
             JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
             return Content(JsonConvert.SerializeObject(dataPoints, _jsonSetting), "application/json");
+        }
+
+        [HttpPost]
+        public void SetTemperature(string value)
+        {
+            var currentTempSet = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "02E1271D-D30C-4C16-8010-E729099CC7E3");
+
+            if (currentTempSet != null)
+            {
+                currentTempSet.Value = value;
+                db.SaveChanges();
+            }
         }
 
         [HttpPost]
@@ -117,18 +140,21 @@ namespace LicentaPrototip.Controllers
             var lowAlertTriggered = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "54DAAB85-0953-4EA6-B905-E10FC958E846");
             var highAlertTriggered = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "086989F7-A1AC-4E10-97CF-2030E1F069D1");
 
-            if (float.Parse(currentTemperature) > float.Parse(highTempLimit) && highAlertTriggered.Value == bool.FalseString)
+            if (!string.IsNullOrEmpty(currentTemperature))
             {
-                GenerateHighLimitAlert(highTempLimit);
-                highAlertTriggered.Value = bool.TrueString;
-                db.SaveChanges();
-            }
+                if (float.Parse(currentTemperature) > float.Parse(highTempLimit) && highAlertTriggered.Value == bool.FalseString)
+                {
+                    GenerateHighLimitAlert(highTempLimit);
+                    highAlertTriggered.Value = bool.TrueString;
+                    db.SaveChanges();
+                }
 
-            if (float.Parse(currentTemperature) < float.Parse(lowTempLimit) && lowAlertTriggered.Value == bool.FalseString)
-            {
-                GenerateLowLimitAlert(lowTempLimit);
-                lowAlertTriggered.Value = bool.TrueString;
-                db.SaveChanges();
+                if (float.Parse(currentTemperature) < float.Parse(lowTempLimit) && lowAlertTriggered.Value == bool.FalseString)
+                {
+                    GenerateLowLimitAlert(lowTempLimit);
+                    lowAlertTriggered.Value = bool.TrueString;
+                    db.SaveChanges();
+                }
             }
         }
 

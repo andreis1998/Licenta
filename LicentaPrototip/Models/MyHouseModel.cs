@@ -8,7 +8,7 @@ namespace LicentaPrototip.Models
 {
     public class MyHouseModel
     {
-        public string Temperature { get; set; }
+        public float Temperature { get; set; }
         public bool IsLedIntensityAutomatic { get; set; }
         public int LowLimitTemperature { get; set; }
         public int HighLimitTemperature { get; set; }

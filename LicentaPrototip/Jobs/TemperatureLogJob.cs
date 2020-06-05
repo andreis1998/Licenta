@@ -18,13 +18,19 @@ namespace LicentaPrototip.Jobs
         {
             var currentTemperature = db.HouseParameters.SingleOrDefault(x => x.Description == "TemperaturaInterioara").Value;
 
-            db.TemperatureLogs.Add(new TemperatureLogs
+            if (!string.IsNullOrEmpty(currentTemperature))
             {
-                Value = currentTemperature,
-                Date = DateTime.Now
-            });
+                if (currentTemperature.First() != '-' && currentTemperature.First() != '−')
+                {
+                    db.TemperatureLogs.Add(new TemperatureLogs
+                    {
+                        Value = currentTemperature,
+                        Date = DateTime.UtcNow.AddHours(3)
+                    });
 
-            db.SaveChanges();
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

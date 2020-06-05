@@ -22,8 +22,11 @@ namespace LicentaPrototip.Jobs
             var temperature = db.HouseParameters.SingleOrDefault(x => x.Description == "TemperaturaInterioara");
             if (temperature != null)
             {
-                temperature.Value = t.Result;
-                db.SaveChanges();
+                if (t.Result != null)
+                {
+                    temperature.Value = t.Result;
+                    db.SaveChanges();
+                }
             }
         }
     }

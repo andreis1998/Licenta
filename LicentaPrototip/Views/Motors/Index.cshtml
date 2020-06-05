@@ -3,9 +3,30 @@
     ViewBag.Title = "Control porti";
 }
 
+<br>
 <h2>Control porti</h2>
 <br>
 
-<li class="btn btn-secondary">@Html.ActionLink("Deschide Usa", "OpenDoor", "Lights")</li>
-<li class="btn btn-secondary">@Html.ActionLink("Inchide Usa", "CloseDoor", "Lights")</li>
+<div class="form-group row">
+    <div class="row-cols-md-7">
+        <button class="btn btn-secondary" id="openBtn" onclick="OpenDoor()">Deschide poarta</button>
+        <button class="btn btn-secondary" id="closeBtn" onclick="CloseDoor()">Inchide poarta</button>
+    </div>
+</div>
+
+<script>
+    function OpenDoor() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("OpenDoor")'
+            });
+    }
+
+    function CloseDoor() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CloseDoor")'
+            });
+    }
+</script>
 

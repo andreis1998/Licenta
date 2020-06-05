@@ -11,7 +11,7 @@ namespace LicentaPrototip.Utilities
 {
     public class HttpUtilities
     {
-        private const string HouseIP = "http://192.168.0.192/";
+        private const string HouseIP = "http://93.118.47.218/";
 
         public async Task<string> PostAsync(string request, dynamic jsonObject)
         {

@@ -21,7 +21,7 @@ namespace LicentaPrototip.Jobs
             .WithIdentity("trigger1", "group1")
             .StartNow()
             .WithSimpleSchedule(x => x
-            .WithIntervalInSeconds(10)
+            .WithIntervalInSeconds(30)
             .RepeatForever())
             .Build();
 
@@ -37,7 +37,7 @@ namespace LicentaPrototip.Jobs
             .WithIdentity("trigger2", "group1")
             .StartNow()
             .WithSimpleSchedule(x => x
-            .WithIntervalInSeconds(5)
+            .WithIntervalInSeconds(10)
             .RepeatForever())
             .Build();
 
@@ -53,7 +53,7 @@ namespace LicentaPrototip.Jobs
             .WithIdentity("trigger3", "group1")
             .StartNow()
             .WithSimpleSchedule(x => x
-            .WithIntervalInSeconds(30)
+            .WithIntervalInSeconds(60)
             .RepeatForever())
             .Build();
 

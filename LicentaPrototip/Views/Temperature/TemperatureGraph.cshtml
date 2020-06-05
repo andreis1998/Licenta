@@ -39,7 +39,8 @@
 
             }
 
-            $.getJSON("/Licenta/Temperature/GetContent", addData);
+            $.getJSON("/Licenta/Temperature/GetContent", addData)
+                .fail(function () { $.getJSON("/Temperature/GetContent", addData); });
 
         }
     </script>

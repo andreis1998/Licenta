@@ -23,6 +23,7 @@ namespace LicentaPrototip.Controllers
             return View(model);
         }
 
+        [HttpPost]
         public void ToggleLed()
         {
             var t = Task.Run(() => HttpHelper.PostAsync("toggle"));

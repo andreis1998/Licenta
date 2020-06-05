@@ -14,7 +14,7 @@
     <div class="form-group row">
         @Html.LabelFor(model => model.Temperature, "Temperatura curenta")
         <div class="col-md-3">
-            @Html.EditorFor(model => model.Temperature, new { htmlAttributes = new { @id = "tempBox" , @readonly = "readonly", @onchange = "CheckLimits()"} })
+            @Html.EditorFor(model => model.Temperature, new { htmlAttributes = new { @id = "tempBox", @readonly = "readonly", @onchange = "CheckLimits()" } })
         </div>
     </div>
 </div>
@@ -46,33 +46,7 @@
     @Html.LabelFor(model => model.HighLimitTemperature, "Temperatura limita superioara")
     <div class="col-md-3">
         @Html.EditorFor(model => model.HighLimitTemperature, new { htmlAttributes = new { @id = "highLimit", @min = 18, @max = 30, @onchange = "SetHighLimit()" } })<br>
-        @Html.ValidationMessageFor(model => model.HighLimitTemperature, "Limita superioara trebuie sa fie mai mare decat cea inferioara!", new { @class = "text-danger", @id = "highLimitError"})
+        @Html.ValidationMessageFor(model => model.HighLimitTemperature, "Limita superioara trebuie sa fie mai mare decat cea inferioara!", new { @class = "text-danger", @id = "highLimitError" })
     </div>
 </div>
-
-
-@*<script src="http://code.jquery.com/jquery-1.7.1.min.js">
-
-    $(document).ready(function () {
-        $('#tempBox').val("Muie");
-        setTimeout(Temp, 5000);
-    });
-
-    function Temp() {
-            $.ajax({
-                type: 'GET',
-                url: @Url.Action("GetTemp"),
-                success: function (data) {
-                    showTemp(data);
-                },
-                complete: function (data) {
-                    setTimeout(Temp, 5000);
-                }
-            });
-    }
-
-    function showTemp(data) {
-         $('#tempBox').val(data);
-    }
-</script>*@
 
