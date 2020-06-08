@@ -1,11 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "MyHouse";
-
 }
 
 <br>
-<h2>MyHouse</h2>
+<h2>Hello @Session["Name"]!</h2>
 <br>
 
 <li class="btn btn-secondary">@Html.ActionLink("Lumini", "Index", "Lights", null, new { @class = "nav-link" })</li>

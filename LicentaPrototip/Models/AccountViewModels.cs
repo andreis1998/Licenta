@@ -79,6 +79,15 @@ namespace LicentaPrototip.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Nume")]
+        public string Name { get; set; }
+
+        [Display(Name = "Prenume")]
+        public string Surname { get; set; }
+
+        [Display(Name = "Cont cu drepturi depline?")]
+        public bool IsAdultAccount { get; set; }
     }
 
     public class ResetPasswordViewModel

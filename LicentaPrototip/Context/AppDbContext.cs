@@ -18,5 +18,6 @@ namespace LicentaPrototip.Context
 
         public DbSet<HouseParameters> HouseParameters { get; set; }
         public DbSet<TemperatureLogs> TemperatureLogs { get; set; }
+        public DbSet<Accounts> Accounts { get; set; }
     }
 }

@@ -209,10 +209,19 @@
     <Compile Include="Migrations\202006021044307_AddTable_TemperatureLogs.Designer.cs">
       <DependentUpon>202006021044307_AddTable_TemperatureLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006080942275_AddAccounts_Table.cs" />
+    <Compile Include="Migrations\202006080942275_AddAccounts_Table.Designer.cs">
+      <DependentUpon>202006080942275_AddAccounts_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006080956053_Update_AccountsTable.cs" />
+    <Compile Include="Migrations\202006080956053_Update_AccountsTable.Designer.cs">
+      <DependentUpon>202006080956053_Update_AccountsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\MyHouseModel.cs" />
     <Compile Include="Models\TemperatureGraphModel.cs" />
+    <Compile Include="SqlViews\Accounts.cs" />
     <Compile Include="SqlViews\HouseParameters.cs" />
     <Compile Include="SqlViews\TemperatureLogs.cs" />
     <Compile Include="Utilities\HttpUtilities.cs" />
@@ -301,7 +310,6 @@
     <Content Include="Views\Motors\Index.cshtml" />
     <Content Include="Views\Temperature\Index.cshtml" />
     <Content Include="Views\Temperature\TemperatureGraph.cshtml" />
-    <Content Include="Views\error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,6 +336,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006021044307_AddTable_TemperatureLogs.resx">
       <DependentUpon>202006021044307_AddTable_TemperatureLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006080942275_AddAccounts_Table.resx">
+      <DependentUpon>202006080942275_AddAccounts_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006080956053_Update_AccountsTable.resx">
+      <DependentUpon>202006080956053_Update_AccountsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

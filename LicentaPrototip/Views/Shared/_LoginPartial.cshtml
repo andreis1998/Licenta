@@ -1,23 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (Session["Name"] != null)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
-    }
+
+    @*<ul class="nav navbar-nav navbar-right">
+        @Html.Label("Hello " + Session["Name"] + "!", new { @class = "navbar-brand" })
+        <li class="btn btn-secondary">@Html.ActionLink("Log off", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })</li>
+    </ul>*@
+    <div class="btn-group" role="group" aria-label="AuthentificationButtons">
+        <li class="btn btn-secondary">@Html.ActionLink("Log off", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })</li>
+        <li class="btn btn-secondary">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    </div>
 }
 else
 {
     @*<ul class="form-inline my-2 my-lg-0">*@
     <div class="btn-group" role="group" aria-label="AuthentificationButtons">
         <li class="btn btn-secondary">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        <li class="btn btn-secondary">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        </div>
-    }
+        @*<li class="btn btn-secondary">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    </div>
+}
