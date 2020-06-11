@@ -10,9 +10,10 @@
 <h2>Control lumini</h2>
 <br>
 
-    <div class="form-group row">
-        <button class="btn btn-secondary" id="intLed" onclick="Led()">Aprinde lumina</button>
-    </div>
+<div class="form-group row">
+    <button class="btn btn-secondary" id="intLedGround" onclick="GroundLed()">Aprinde lumina parter</button>
+    <button class="btn btn-secondary" id="intLedFloor" onclick="FloorLed()">Aprinde lumina etaj</button>
+</div>
     <div class="form-group row">
             @Html.Label("Intensitate lumina LED")
         <div class="col-md-3">
@@ -40,47 +41,22 @@
         </div>
     </div>
 
-@*@Html.EditorFor(model => model.Temperature, new { htmlAttributes = new { @id = "tempBox"} })
-<button class="btn btn-secondary" id="showTemp" onclick="Temp()">Afisare temperatura</button>*@
-
 <script type="text/javascript">
 
-    @*$("#showTemp").click(
-        function (e) {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ShowTemp")',
-                success: function (results) {
-                    var temp = $("#tempBox");
-                    temp.empty();
-
-                    $.each(results, function () {
-                        login.val(this.ID).text(this.Value);
-                    });
-                }
-            });
-        });*@
-    /*src = "http://code.jquery.com/jquery-1.11.0.min.js"*/
-
-    function Temp() {
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("ShowTemp")',
-                success: function (data) {
-                    showTemp(data);
-                }
-            });
+    function GroundLed() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GroundLed")',
+            data: { status: @Model.IsGroundLedOn.ToString().ToLower() }
+        });
     }
 
-    function showTemp(data) {
-         $('#tempBox').val(data);
-    }
-
-    function Led() {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ToggleLed")'
-            });
+    function FloorLed() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("FloorLed")',
+            data: { status: @Model.IsFloorLedOn.ToString().ToLower() }
+        });
     }
 
     function SetIntensity() {

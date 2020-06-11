@@ -18,7 +18,9 @@ namespace LicentaPrototip.Controllers
         public ActionResult Index(MyHouseModel model)
         {
 
-            model.IsLedIntensityAutomatic = bool.Parse(db.HouseParameters.SingleOrDefault(x => x.Description == "IntensitateAutomata").Value);
+            model.IsLedIntensityAutomatic = bool.Parse(db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "38ED76B4-FF9A-49FE-B547-F737E4E9F5E3").Value);
+            model.IsGroundLedOn = bool.Parse(db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "48F4CD81-FFFA-4F26-92CE-D6D4196F84B6").Value);
+            model.IsFloorLedOn = bool.Parse(db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "CBA58E71-3A17-4369-A99A-250E63E9F557").Value);
 
             return View(model);
         }
@@ -38,29 +40,42 @@ namespace LicentaPrototip.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult OpenDoor()
+        [HttpPost]
+        public void GroundLed(string status)
         {
-            var t = Task.Run(() => HttpHelper.PostAsync("openDoor"));
+            var t = Task.Run(() => HttpHelper.PostAsync("ledground"));
             t.Wait();
 
-            return RedirectToAction("Index");
+            var groundLedStatus = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "48F4CD81-FFFA-4F26-92CE-D6D4196F84B6");
+            if (status == bool.TrueString.ToLower())
+            {
+                groundLedStatus.Value = bool.FalseString;
+            }
+            else
+            {
+                groundLedStatus.Value = bool.TrueString;
+            }
+
+            db.SaveChanges();
         }
 
-        public ActionResult CloseDoor()
+        [HttpPost]
+        public void FloorLed(string status)
         {
-            var t = Task.Run(() => HttpHelper.PostAsync("closeDoor"));
+            var t = Task.Run(() => HttpHelper.PostAsync("ledfloor"));
             t.Wait();
 
-            return RedirectToAction("Index");
-        }
+            var floorLedStatus = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "CBA58E71-3A17-4369-A99A-250E63E9F557");
+            if (status == bool.TrueString.ToLower())
+            {
+                floorLedStatus.Value = bool.FalseString;
+            }
+            else
+            {
+                floorLedStatus.Value = bool.TrueString;
+            }
 
-        [HttpGet]
-        public string ShowTemp()
-        {
-            var t = Task.Run(() => HttpHelper.PostAsync("temperature"));
-            t.Wait();
-
-            return t.Result;
+            db.SaveChanges();
         }
 
         [HttpPost]
@@ -76,7 +91,7 @@ namespace LicentaPrototip.Controllers
             var t = Task.Run(() => HttpHelper.PostAsync("automaticLedIntensity"));
             t.Wait();
 
-            var automaticIntensityValue = db.HouseParameters.SingleOrDefault(x => x.Description == "IntensitateAutomata");
+            var automaticIntensityValue = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "38ED76B4-FF9A-49FE-B547-F737E4E9F5E3");
             if (automaticIntensityValue.Value == bool.TrueString)
             {
                 automaticIntensityValue.Value = bool.FalseString;
