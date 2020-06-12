@@ -86,22 +86,47 @@ namespace LicentaPrototip.Controllers
         }
 
         [HttpPost]
-        public void SetAutomaticIntensity()
+        public void SetAutomaticIntensity(string value)
         {
-            var t = Task.Run(() => HttpHelper.PostAsync("automaticLedIntensity"));
-            t.Wait();
-
             var automaticIntensityValue = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "38ED76B4-FF9A-49FE-B547-F737E4E9F5E3");
-            if (automaticIntensityValue.Value == bool.TrueString)
+            if (value == null)
             {
-                automaticIntensityValue.Value = bool.FalseString;
+                if (automaticIntensityValue.Value == bool.TrueString)
+                {
+                    automaticIntensityValue.Value = bool.FalseString;
+                    value = bool.FalseString;
+                }
+                else
+                {
+                    automaticIntensityValue.Value = bool.TrueString;
+                    value = bool.TrueString;
+                }
             }
             else
             {
-                automaticIntensityValue.Value = bool.TrueString;
+                if (value != string.Empty)
+                {
+                    if (value == bool.FalseString.ToLower())
+                    {
+                        automaticIntensityValue.Value = bool.FalseString;
+                        value = bool.FalseString;
+                    }
+                    else
+                    {
+                        automaticIntensityValue.Value = bool.TrueString;
+                        value = bool.TrueString;
+                    }
+                }
+                else
+                {
+                    return;
+                }
             }
 
             db.SaveChanges();
+
+            var t = Task.Run(() => HttpHelper.PostAsync("automaticLedIntensity?value=" + value));
+            t.Wait();
         }
     }
 }

@@ -44,6 +44,14 @@
 <script type="text/javascript">
 
     function GroundLed() {
+        if ($('#AutomaticLedsCheckBox').attr("checked") == "checked") {
+            $("#AutomaticLedsCheckBox").prop('checked', false)
+            SetAutomaticIntensity("false");
+        }
+        else {
+            SetAutomaticIntensity("");
+        }
+
         $.ajax({
             type: 'POST',
             url: '@Url.Action("GroundLed")',
@@ -52,6 +60,14 @@
     }
 
     function FloorLed() {
+        if ($('#AutomaticLedsCheckBox').attr("checked") == "checked") {
+            $("#AutomaticLedsCheckBox").prop('checked', false)
+            SetAutomaticIntensity("false");
+        }
+        else {
+            SetAutomaticIntensity("");
+        }
+
         $.ajax({
             type: 'POST',
             url: '@Url.Action("FloorLed")',
@@ -68,17 +84,27 @@
     };
 
 
-    function SetAutomaticIntensity() {
-        if ($("#intensityLedRange").attr("disabled") == "disabled") {
-            $("#intensityLedRange").prop('disabled', false)
+    function SetAutomaticIntensity(status) {
+        if (status == null) {
+            if ($("#intensityLedRange").attr("disabled") == "disabled") {
+                $("#intensityLedRange").prop('disabled', false)
+            }
+            else {
+                $("#intensityLedRange").prop('disabled', true)
+            }
         }
         else {
-            $("#intensityLedRange").prop('disabled', true)
+            if ($('#AutomaticLedsCheckBox').attr("checked") == "checked") {
+                if ($("#intensityLedRange").attr("disabled") == "disabled") {
+                    $("#intensityLedRange").prop('disabled', false)
+                }
+            }
         }
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Action("SetAutomaticIntensity")'
+            url: '@Url.Action("SetAutomaticIntensity")',
+            data: { value: status }
         });
     };
 </script>
