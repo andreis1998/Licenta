@@ -15,5 +15,6 @@ namespace LicentaPrototip.Models
         public float CurrentSetTemperature { get; set; }
         public bool IsGroundLedOn { get; set; }
         public bool IsFloorLedOn { get; set; }
+        public bool IsTemperatureAutomatic { get; set; }
     }
 }

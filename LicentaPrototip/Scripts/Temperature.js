@@ -120,7 +120,7 @@ function checkLimitsExternal() {
 
 function DecreaseTemp() {
     var temp = $('#tempSet').val();
-    if (temp > "20") {
+    if (temp > "22") {
         $('#tempSet').val(temp - 0.5);
         $.ajax({
             type: 'POST',
@@ -154,4 +154,21 @@ function IncreaseTemp() {
             }
         });
     }
+}
+
+function SetAutomaticTemp() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/Licenta/Temperature/SetAutomaticTemperature',
+        error: function (data) {
+            SetAutomaticTempExternal();
+        }
+    });
+}
+
+function SetAutomaticTempExternal() {
+    $.ajax({
+        type: 'POST',
+        url: 'https://smarthouselicenta.azurewebsites.net/Temperature/SetAutomaticTemperature'
+    });
 }

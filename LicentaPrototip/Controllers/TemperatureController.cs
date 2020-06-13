@@ -25,6 +25,7 @@ namespace LicentaPrototip.Controllers
             var highTempLimit = db.HouseParameters.SingleOrDefault(x => x.Description == "LimitaSuperioaraTemperatura").Value;
             var currentTemp = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "1FFC07FE-4A3B-43BA-AFA6-597B0F2763C3").Value;
             var currentTempSet = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "02E1271D-D30C-4C16-8010-E729099CC7E3").Value;
+            var automaticTemp = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "4C3DBDE7-E005-417A-B913-0685FE2F282A").Value;
             var model = new MyHouseModel();
 
             if (!string.IsNullOrEmpty(lowTempLimit))
@@ -42,6 +43,10 @@ namespace LicentaPrototip.Controllers
             if (!string.IsNullOrEmpty(currentTempSet))
             {
                 model.CurrentSetTemperature = float.Parse(currentTempSet);
+            }
+            if (!string.IsNullOrEmpty(automaticTemp))
+            {
+                model.IsTemperatureAutomatic = bool.Parse(automaticTemp);
             }
 
             return View(model);
@@ -125,6 +130,25 @@ namespace LicentaPrototip.Controllers
             if (highAlertTriggered != null)
             {
                 highAlertTriggered.Value = bool.FalseString;
+            }
+
+            db.SaveChanges();
+        }
+
+        [HttpPost]
+        public void SetAutomaticTemperature()
+        {
+            var t = Task.Run(() => HttpHelper.PostAsync("automaticTemp"));
+            t.Wait();
+
+            var automaticTemperatureValue = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "4C3DBDE7-E005-417A-B913-0685FE2F282A");
+            if (automaticTemperatureValue.Value == bool.TrueString)
+            {
+                automaticTemperatureValue.Value = bool.FalseString;
+            }
+            else
+            {
+                automaticTemperatureValue.Value = bool.TrueString;
             }
 
             db.SaveChanges();

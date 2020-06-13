@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Jobs\JobScheduler.cs" />
     <Compile Include="Jobs\LightIntensityJob.cs" />
+    <Compile Include="Jobs\TemperatureControlJob.cs" />
     <Compile Include="Jobs\TemperatureJob.cs" />
     <Compile Include="Jobs\TemperatureLogJob.cs" />
     <Compile Include="Migrations\202005281257496_InitialMigration.cs" />

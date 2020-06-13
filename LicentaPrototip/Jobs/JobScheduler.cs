@@ -58,6 +58,22 @@ namespace LicentaPrototip.Jobs
             .Build();
 
             scheduler3.ScheduleJob(job3, trigger3);
+
+            //Control Temperature
+            IScheduler scheduler4 = StdSchedulerFactory.GetDefaultScheduler();
+            scheduler4.Start();
+
+            IJobDetail job4 = JobBuilder.Create<TemperatureControlJob>().Build();
+
+            ITrigger trigger4 = TriggerBuilder.Create()
+            .WithIdentity("trigger4", "group1")
+            .StartNow()
+            .WithSimpleSchedule(x => x
+            .WithIntervalInSeconds(10)
+            .RepeatForever())
+            .Build();
+
+            scheduler4.ScheduleJob(job4, trigger4);
         }
     }
 }

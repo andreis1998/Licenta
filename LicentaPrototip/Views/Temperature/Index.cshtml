@@ -29,7 +29,19 @@
         </div>
     </div>
     <br>
-
+    <div class="form-group row">
+        @Html.Label("Setare temperatura automata")
+        <div class="col-md-3">
+            @if (Model.IsTemperatureAutomatic)
+            {
+                <input id="AutomaticTempCheckBox" type="checkbox" onchange="SetAutomaticTemp()" checked="checked" />
+            }
+            else
+            {
+                <input id="AutomaticTempCheckBox" type="checkbox" onchange="SetAutomaticTemp()" />
+            }
+        </div>
+    </div>
     <div class="form-group row">
         <div class="row-cols-md-7">
             <li class="btn btn-secondary">@Html.ActionLink("Istoric temperatura", "ShowGraph", "Temperature", null, new { @class = "nav-link" })</li>
