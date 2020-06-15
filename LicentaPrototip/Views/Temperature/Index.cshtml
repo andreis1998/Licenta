@@ -51,7 +51,7 @@
     <div class="form-group row">
         @Html.LabelFor(model => model.LowLimitTemperature, "Temperatura limita inferioara")
         <div class="col-md-3">
-            @Html.EditorFor(model => model.LowLimitTemperature, new { htmlAttributes = new { @id = "lowLimit", @min = 18, @max = 30, @onchange = "SetLowLimit()" } })
+            @Html.EditorFor(model => model.LowLimitTemperature, new { htmlAttributes = new { @id = "lowLimit", @min = 22, @max = 30, @onchange = "SetLowLimit()" } })
             @Html.ValidationMessageFor(model => model.LowLimitTemperature, "Limita inferioara trebuie sa fie mai mica decat cea superioara!", new { @class = "text-danger", @id = "lowLimitError" })
         </div>
     </div>
@@ -59,7 +59,7 @@
     <div class="form-group row">
         @Html.LabelFor(model => model.HighLimitTemperature, "Temperatura limita superioara")
         <div class="col-md-3">
-            @Html.EditorFor(model => model.HighLimitTemperature, new { htmlAttributes = new { @id = "highLimit", @min = 18, @max = 30, @onchange = "SetHighLimit()" } })<br>
+            @Html.EditorFor(model => model.HighLimitTemperature, new { htmlAttributes = new { @id = "highLimit", @min = 22, @max = 30, @onchange = "SetHighLimit()" } })<br>
             @Html.ValidationMessageFor(model => model.HighLimitTemperature, "Limita superioara trebuie sa fie mai mare decat cea inferioara!", new { @class = "text-danger", @id = "highLimitError" })
         </div>
     </div>

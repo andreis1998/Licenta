@@ -184,6 +184,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\AppDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlarmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LightsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\DoorJob.cs" />
     <Compile Include="Jobs\JobScheduler.cs" />
     <Compile Include="Jobs\LightIntensityJob.cs" />
     <Compile Include="Jobs\TemperatureControlJob.cs" />
@@ -311,6 +313,7 @@
     <Content Include="Views\Motors\Index.cshtml" />
     <Content Include="Views\Temperature\Index.cshtml" />
     <Content Include="Views\Temperature\TemperatureGraph.cshtml" />
+    <Content Include="Views\Alarm\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -69,11 +69,27 @@ namespace LicentaPrototip.Jobs
             .WithIdentity("trigger4", "group1")
             .StartNow()
             .WithSimpleSchedule(x => x
-            .WithIntervalInSeconds(10)
+            .WithIntervalInSeconds(8)
             .RepeatForever())
             .Build();
 
             scheduler4.ScheduleJob(job4, trigger4);
+
+            //Control Door
+            IScheduler scheduler5 = StdSchedulerFactory.GetDefaultScheduler();
+            scheduler5.Start();
+
+            IJobDetail job5 = JobBuilder.Create<DoorJob>().Build();
+
+            ITrigger trigger5 = TriggerBuilder.Create()
+            .WithIdentity("trigger5", "group1")
+            .StartNow()
+            .WithSimpleSchedule(x => x
+            .WithIntervalInSeconds(2)
+            .RepeatForever())
+            .Build();
+
+            scheduler5.ScheduleJob(job5, trigger5);
         }
     }
 }

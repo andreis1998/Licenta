@@ -1,0 +1,33 @@
+﻿@using LicentaPrototip.Models;
+@{
+    ViewBag.Title = "Alarma";
+}
+
+@model MyHouseModel
+
+<br>
+<h2>Alarma</h2>
+<br>
+
+<div class="form-group row">
+    @Html.Label("Activare alarma")
+    <div class="col-md-3">
+        @if (Model.IsAlarmOn)
+        {
+            <input id="AlarmCheckBox" type="checkbox" onchange="SetAlarm()" checked="checked" />
+        }
+        else
+        {
+            <input id="AlarmCheckBox" type="checkbox" onchange="SetAlarm()" />
+        }
+    </div>
+</div>
+
+<script>
+    function SetAlarm() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SetAlarm")'
+        });
+    }
+</script>

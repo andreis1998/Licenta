@@ -14,4 +14,8 @@
     <li class="btn btn-secondary">@Html.ActionLink("Porti", "Index", "Motors", null, new { @class = "nav-link" })</li>
 }
 <li class="btn btn-secondary">@Html.ActionLink("Temperatura", "Index", "Temperature", null, new { @class = "nav-link" })</li>
+@if (Session["adult"].ToString() == bool.TrueString)
+{
+    <li class="btn btn-secondary">@Html.ActionLink("Alarma", "Index", "Alarm", null, new { @class = "nav-link" })</li>
+}
 

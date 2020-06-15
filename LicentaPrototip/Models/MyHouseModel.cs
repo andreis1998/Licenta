@@ -16,5 +16,7 @@ namespace LicentaPrototip.Models
         public bool IsGroundLedOn { get; set; }
         public bool IsFloorLedOn { get; set; }
         public bool IsTemperatureAutomatic { get; set; }
+        public bool IsDoorAutomatic { get; set; }
+        public bool IsAlarmOn { get; set; }
     }
 }
