@@ -53,6 +53,15 @@ namespace LicentaPrototip.Controllers
                 {
                     Session["Adult"] = bool.FalseString;
                 }
+
+                if (account.IsAdmin)
+                {
+                    Session["admin"] = bool.TrueString;
+                }
+                else
+                {
+                    Session["admin"] = bool.FalseString;
+                }
                 return View("../Home/MyHouse");
             }
 

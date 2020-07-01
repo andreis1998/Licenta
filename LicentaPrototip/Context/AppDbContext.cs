@@ -13,7 +13,6 @@ namespace LicentaPrototip.Context
         public AppDbContext() : base("SmartHouseConnection")
         {
             Database.SetInitializer<AppDbContext>(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
-            //Database.SetInitializer<AppDbContext>(null);
         }
 
         public DbSet<HouseParameters> HouseParameters { get; set; }

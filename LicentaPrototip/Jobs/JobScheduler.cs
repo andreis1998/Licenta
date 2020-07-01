@@ -85,7 +85,7 @@ namespace LicentaPrototip.Jobs
             .WithIdentity("trigger5", "group1")
             .StartNow()
             .WithSimpleSchedule(x => x
-            .WithIntervalInSeconds(2)
+            .WithIntervalInSeconds(5)
             .RepeatForever())
             .Build();
 

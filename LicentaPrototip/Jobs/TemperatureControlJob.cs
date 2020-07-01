@@ -17,9 +17,13 @@ namespace LicentaPrototip.Jobs
         public void Execute(IJobExecutionContext context)
         {
             var setPoint = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "02E1271D-D30C-4C16-8010-E729099CC7E3").Value;
+            var automaticTemp = db.HouseParameters.SingleOrDefault(x => x.ParameterId.ToString() == "4C3DBDE7-E005-417A-B913-0685FE2F282A").Value;
 
-            var t = Task.Run(() => HttpHelper.PostAsync("controlTemperature?setpoint=" + setPoint));
-            t.Wait();
+            if (automaticTemp == bool.TrueString)
+            {
+                var t = Task.Run(() => HttpHelper.PostAsync("controlTemperature?setpoint=" + setPoint));
+                t.Wait();
+            }
         }
     }
 }

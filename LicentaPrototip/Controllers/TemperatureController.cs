@@ -184,7 +184,8 @@ namespace LicentaPrototip.Controllers
 
         private void GenerateHighLimitAlert(string threshold)
         {
-            using (var message = new MailMessage("andreis.serban1998@gmail.com", "andreis.serban1998@gmail.com"))
+            var email = db.Accounts.FirstOrDefault(x => x.Surname == Session["Name"].ToString()).Email;
+            using (var message = new MailMessage("andreis.serban1998@gmail.com", email))
             {
                 var dateAndTime = DateTime.Now;
                 message.Subject = "Alerta temperatura casa";

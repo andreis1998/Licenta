@@ -7,10 +7,13 @@
         @Html.Label("Hello " + Session["Name"] + "!", new { @class = "navbar-brand" })
         <li class="btn btn-secondary">@Html.ActionLink("Log off", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })</li>
     </ul>*@
-    <div class="btn-group" role="group" aria-label="AuthentificationButtons">
-        <li class="btn btn-secondary">@Html.ActionLink("Log off", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })</li>
+<div class="btn-group" role="group" aria-label="AuthentificationButtons">
+    <li class="btn btn-secondary">@Html.ActionLink("Log off", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "logoffLink" })</li>
+    @if (Session["admin"].ToString() == bool.TrueString)
+    {
         <li class="btn btn-secondary">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    </div>
+    }
+</div>
 }
 else
 {
